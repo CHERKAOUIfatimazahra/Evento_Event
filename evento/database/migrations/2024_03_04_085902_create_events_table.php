@@ -21,8 +21,11 @@ return new class extends Migration
             $table->enum('type', ["Physical", "Online"])->default('Physical');
             $table->float('price');
             $table->integer('tickets_available');
-            $table->boolean('is_published')->default(false);
             $table->string('image')->nullable();
+            
+            $table->boolean('is_published')->default(false);
+            $table->string('status')->default('pending');
+
             $table->foreignId('user_id')->constrained('users');
             $table->foreignId('category_id')->constrained('categories');
             $table->timestamps();
