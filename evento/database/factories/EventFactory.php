@@ -31,9 +31,13 @@ class EventFactory extends Factory
             'type' => $this->faker->randomElement(['Physical', 'Online']),
             'price' => $this->faker->numberBetween($min = 0, $max = 1000),
             'tickets_available' => $this->faker->numberBetween(10, 200),
-            'is_published' => false,
             'image' => $this->faker->imageUrl(),
+
+            'is_published' => false,
+            'status' => $this->faker->randomElement(['pending', 'approved', 'rejected']),
+            
             'user_id' => $this->faker->numberBetween(DB::table('users')->min('id'),DB::table('users')->max('id')),
+            'category_id' => $this->faker->numberBetween(DB::table('categories')->min('id'),DB::table('categories')->max('id')),
         ];
     }
 }

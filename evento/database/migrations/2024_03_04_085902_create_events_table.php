@@ -22,9 +22,9 @@ return new class extends Migration
             $table->float('price');
             $table->integer('tickets_available');
             $table->string('image')->nullable();
-            
+
             $table->boolean('is_published')->default(false);
-            $table->string('status')->default('pending');
+            $table->enum('status',['pending', 'approved', 'rejected'])->default('pending');
 
             $table->foreignId('user_id')->constrained('users');
             $table->foreignId('category_id')->constrained('categories');
