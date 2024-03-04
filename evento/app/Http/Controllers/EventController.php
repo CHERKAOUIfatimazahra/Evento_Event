@@ -16,10 +16,10 @@ class EventController extends Controller
     {
         $events = Event::latest()->paginate(5);
         
-        return view('events.index',compact('users'))
+        return view('events.index',compact('events'))
                     ->with('i', (request()->input('page', 1) - 1) * 5);
     }
-
+ 
     /**
      * Show the form for creating a new resource.
      */
@@ -55,7 +55,7 @@ class EventController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateEventRequest $request, Event $event)
+    public function update(Request $request, Event $event)
     {
         //
     }

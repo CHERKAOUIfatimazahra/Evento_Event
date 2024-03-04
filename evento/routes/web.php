@@ -3,6 +3,7 @@
 
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\EventController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -19,6 +20,7 @@ use Illuminate\Support\Facades\Route;
 
 // Home page
 Route::view('/', 'home');
+Route::get('/', [HomeController::class, 'index']);
 
 // find event pages
 Route::view('/find-event', 'find-event');
