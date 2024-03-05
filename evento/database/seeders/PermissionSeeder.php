@@ -25,7 +25,6 @@ class PermissionSeeder extends Seeder
             'filter-events-by-category',
             'search-events-by-title',
             'view-event-details',
-            'create-event-organizer',
             'manage-own-events',
             'view-reservation-statistics',
             'manage-reservation-approval',
