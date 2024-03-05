@@ -25,15 +25,20 @@ class EventController extends Controller
      */
     public function create()
     {
-        
+        return view('events.create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreEventRequest $request)
     {
-        //
+        $request->validated();
+
+        Event::create($request->all());
+         
+        return redirect()->route('events.index')
+                        ->with('success','events created successfully.');
     }
 
     /**
@@ -41,7 +46,7 @@ class EventController extends Controller
      */
     public function show(Event $event)
     {
-        //
+        return view('events.show',compact('event'));
     }
 
     /**
@@ -49,15 +54,19 @@ class EventController extends Controller
      */
     public function edit(Event $event)
     {
-        //
+        return view('events.edit', compact('event'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Event $event)
+    public function update(UpdateEventRequest $request, Event $event)
     {
-        //
+        $request->validated();
+        $event->update($request->validated());
+        
+        return redirect()->route('events.index')
+                        ->with('success','Event updated successfully');
     }
 
     /**
@@ -65,6 +74,9 @@ class EventController extends Controller
      */
     public function destroy(Event $event)
     {
-        //
+        $event->delete();
+         
+        return redirect()->route('events.index')
+                        ->with('success','Event deleted successfully');
     }
 }

@@ -60,7 +60,10 @@ class AuthController extends Controller
             'edit_event', 
             'delete_event',  
             'view-event',
-        ]; 
+        ];
+
+        return redirect('/login');
+
     } elseif ($role === 'spectator') {
         $user->assignRole('spectator');
         $permissions = [
@@ -76,7 +79,8 @@ class AuthController extends Controller
         ]; 
     }
     // Assign permissions
-    // $user->assignPermissions($permissions);
+    $user->assignPermissions($permissions);
+    
         return redirect('/login');
     }
 

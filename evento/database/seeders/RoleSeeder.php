@@ -22,46 +22,71 @@ class RoleSeeder extends Seeder
 
         public function run(): void
     {
-        $permission = new Permission();
-        $permission->name = 'create-post';
-        $permission->save();
+        // Permissions for admin role
+        $adminPermissions = [
+            'manage-reservation-approval',
+            'manage-users',
+            'manage-event-categories',
+            'approve-events',
+            'view-platform-statistics',
+        ];
 
-        $role = new Role();
-        $role->name = 'admin';
-        $role->save();
-        $role->permissions()->attach($permission);
-        $permission->roles()->attach($role);
+        // Permissions for spectator role
+        $spectatorPermissions = [
+            'register-for-event',
+            'cancel-registration',
+            'view-event-list',
+            'filter-events-by-category',
+            'search-events-by-title',
+            'view-event-details',
+        ];
 
-        $permission = new Permission();
-        $permission->name = 'create-user';
-        $permission->save();
+        // Permissions for organizer role
+        $organizerPermissions = [
+            'create-event',
+            'edit-event',
+            'delete-event',
+            'view-event',
+            'view-reservation-statistics',
+        ];
 
-        $role = new Role();
-        $role->name = 'user';
-        $role->save();
-        $role->permissions()->attach($permission);
-        $permission->roles()->attach($role);
+        // Creating permissions
+        foreach ($adminPermissions as $permissionName) {
+            Permission::create(['name' => $permissionName]);
+        }
 
-        $admin = Role::where('name', 'admin')->first();
-        $userRole = Role::where('name', 'user')->first();
-        $create_post = Permission::where('name', 'create-post')->first();
-        $create_user = Permission::where('name', 'create-user')->first();
+        foreach ($spectatorPermissions as $permissionName) {
+            Permission::create(['name' => $permissionName]);
+        }
 
-        $admin = new User();
-        $admin->name = 'Admin';
-        $admin->email = 'admin@gmail.com';
-        $admin->password = bcrypt('admin');
-        $admin->save();
-        $admin->roles()->attach($admin);
-        $admin->permissions()->attach($create_post);
+        foreach ($organizerPermissions as $permissionName) {
+            Permission::create(['name' => $permissionName]);
+        }
 
-        $user = new User();
-        $user->name = 'User';
-        $user->email = 'user@gmail.com';
-        $user->password = bcrypt('user');
-        $user->save();
-        $user->roles()->attach($userRole);
-        $user->permissions()->attach($create_user);
+        // Creating roles
+        $roleAdmin = Role::create(['name' => 'admin']);
+        $roleSpectator = Role::create(['name' => 'spectator']);
+        $roleOrganizer = Role::create(['name' => 'organizer']);
+
+        // Attaching permissions to roles
+        $roleAdmin->permissions()->sync(Permission::pluck('id')->toArray());
+        $roleSpectator->permissions()->sync(Permission::whereIn('name', $spectatorPermissions)->pluck('id')->toArray());
+        $roleOrganizer->permissions()->sync(Permission::whereIn('name', $organizerPermissions)->pluck('id')->toArray());
+
+        // Creating users and assigning roles
+        $admin = User::create([
+            'name' => 'Admin',
+            'email' => 'admin@gmail.com',
+            'password' => bcrypt('admin'),
+        ]);
+        $admin->roles()->attach($roleAdmin);
+
+        $user = User::create([
+            'name' => 'User',
+            'email' => 'user@gmail.com',
+            'password' => bcrypt('user'),
+        ]);
+        $user->roles()->attach($roleSpectator);
     }
     }
 // }
