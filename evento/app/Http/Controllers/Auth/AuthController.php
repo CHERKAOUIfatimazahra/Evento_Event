@@ -53,35 +53,15 @@ class AuthController extends Controller
 
         $role = $data['role'];
 
-    if ($role === 'organizer') {
-        $user->assignRole('organizer');
-        $permissions = [
-            'create_event', 
-            'edit_event', 
-            'delete_event',  
-            'view-event',
-        ];
-
-        return redirect('/login');
-
-    } elseif ($role === 'spectator') {
-        $user->assignRole('spectator');
-        $permissions = [
-            'view_event',
-            'register-for-event', 
-            'cancel-registration',
-            'view-event-list',
-            'filter-events-by-category',
-            'search-events-by-title',
-            'view-event-details',
-            'manage-own-events',
-            'view-reservation-statistics',
-        ]; 
-    }
-    // Assign permissions
-    $user->assignPermissions($permissions);
-    
-        return redirect('/login');
+        if ($role === 'organizer') {
+            $user->assignRole('organizer');
+            
+            return redirect('/login');
+            
+        } elseif ($role === 'spectator') {
+            $user->assignRole('spectator');
+        }
+            return redirect('/login');
     }
 
     public function logout(Request $request)
