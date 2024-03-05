@@ -18,7 +18,7 @@
         <h6 class="text-blue-600 text-sm font-bold px-4">Information</h6>
         <ul class="mt-3">
             <li>
-                <a href="{{ route('dashbord.users.index') }}"
+                <a href=""
                     class="text-black hover:text-blue-600 text-sm flex items-center hover:bg-blue-50 rounded px-4 py-3 transition-all">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="w-[18px] h-[18px] mr-4"
                         viewBox="0 0 512 512">
