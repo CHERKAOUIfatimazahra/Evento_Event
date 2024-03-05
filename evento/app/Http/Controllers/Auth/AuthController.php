@@ -33,7 +33,7 @@ class AuthController extends Controller
         
         if ($this->authRepository->login($credentials)) {
             $request->session()->regenerate();
-            return redirect('/');
+            return redirect('/statistique');
         }
         
         return back()->withInput($request->only('email'));
@@ -43,7 +43,36 @@ class AuthController extends Controller
     {
         $data = $request->validated();
         
-        $this->authRepository->register($data);
+        $user = $this->authRepository->register($data);
+
+        $role = $data['role'];
+
+    if ($role === 'organizer') {
+        $user->assignRole('organizer');
+        $permissions = [
+            'create_event', 
+            'edit_event', 
+            'delete_event', 
+            'view-event',]; 
+            
+    } elseif ($role === 'spectator') {
+        $user->assignRole('spectator');
+        $permissions = [
+            'view_event',
+            'register-for-event', 
+            'cancel-registration',
+            'view-event-list',
+            'filter-events-by-category',
+            'search-events-by-title',
+            'view-event-details',
+            'manage-own-events',
+            'view-reservation-statistics',
+        ]; 
+    }
+    
+    // Assign permissions
+    $user->syncPermissions($permissions);
+
         return redirect('/login');
     }
 

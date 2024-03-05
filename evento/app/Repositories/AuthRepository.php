@@ -15,6 +15,7 @@ class AuthRepository implements AuthRepositoryInterface
     public function register(array $data)
     {
         $data['password'] = bcrypt($data['password']);
+        
         return User::create($data);
     }
     public function logout()

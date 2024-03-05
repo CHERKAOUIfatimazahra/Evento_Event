@@ -67,6 +67,15 @@
                             id="password" placeholder="password confirmation" />
 
                     </div>
+                    
+                    <div class="mb-8">
+                        <label for="role" class="block text-gray-700 text-sm font-bold mb-2">Choose Your Role:</label>
+                        <select id="role" name="role" class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                            <option value="organizer">Organizer</option>
+                            <option value="spectator">Spectator</option>
+                        </select>
+                    </div>
+                   
                     <button type="submit"
                         class="block w-full bg-indigo-600 mt-5 py-2 rounded-2xl hover:bg-indigo-700 hover:-translate-y-1 transition-all duration-500 text-white font-semibold mb-2">Register</button>
                     <div class="flex justify-between mt-4">
