@@ -54,6 +54,26 @@ trait HasPermissionsTrait
         }
         return false;
     }
+    public function assignRole(...$roles){
+        $roles=$this->getAllRoles($roles);
+        if($roles === null) {
+            return $this;
+        }
+        $this->roles()->saveMany($roles);
+        return $this;
+    }
+    public function assignPermissions(...$permissions)
+    {
+        $permissions = $this->getAllPermissions($permissions);
+        if ($permissions === null) {
+            return $this;
+        }
+        $this->permissions()->saveMany($permissions);
+        return $this;
+    }
+    public function getAllRoles(array $roles){
+        return Role::whereIn('name', $roles)->get();
+    }
 
     public function roles()
     {

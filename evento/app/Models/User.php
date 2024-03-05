@@ -43,12 +43,9 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
-    public function roles()
-    {
-        return $this->hasMany(Role::class);
-    }
+
     public function events()
     {
-        return $this->hasMany(Event::class)->withPivot('quantity', 'place');        ;
+        return $this->hasMany(Event::class)->withPivot('quantity', 'place');
     }
 }
