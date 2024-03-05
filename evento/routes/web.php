@@ -31,6 +31,7 @@ Route::view('/contact', 'contact');
 // dashbord
 Route::view('/statistique', 'dashbord.statistique');
 Route::view('/users','dashbord.users.index');
+Route::view('/events','dashbord.events.index');
 // single pages
 Route::view('/business', 'page-categories.business');
 
