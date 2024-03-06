@@ -2,7 +2,7 @@
     <img src="images/logo.png" height="100" width="100" class="">
     <ul class="mt-6">
         <li>
-            <a href="javascript:void(0)"
+            <a href="/statistique"
                 class="text-black hover:text-blue-600 text-sm flex items-center hover:bg-blue-50 rounded px-4 py-3 transition-all">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="w-[18px] h-[18px] mr-4"
                     viewBox="0 0 512 512">
@@ -112,7 +112,7 @@
         <h6 class="text-blue-600 text-sm font-bold px-4">Actions</h6>
         <ul class="mt-3">
             <li>
-                <a href=""
+                <a href="/profile"
                     class="text-black hover:text-blue-600 text-sm flex items-center hover:bg-blue-50 rounded px-4 py-3 transition-all">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="w-[18px] h-[18px] mr-4"
                         viewBox="0 0 512 512">
