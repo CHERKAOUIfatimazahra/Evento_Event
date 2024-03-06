@@ -6,7 +6,7 @@
                 <div class="m-3 max-w-xs md:max-w-2xl border border-white bg-white rounded-xl shadow-lg p-6">
                     <div class="md:flex md:space-x-5 space-y-3 md:space-y-0">
                         <div class="md:w-1/3">
-                            <img src="{{ $event->image}}" alt="{{ $event->name }}" class="rounded-xl w-full h-48 object-cover" />
+                            <img src="{{ asset('uploads/events/' . $event->image) }}" alt="{{ $event->name }}" class="rounded-xl w-full h-48 object-cover" />
                         </div>
                         <div class="md:w-2/3 flex flex-col space-y-2 p-3">
                             <div class="flex justify-between item-center">

@@ -21,7 +21,7 @@ return new class extends Migration
             $table->enum('type', ["Physical", "Online"])->default('Physical');
             $table->float('price');
             $table->integer('tickets_available');
-            $table->string('image')->nullable();
+            $table->string('image',255)->nullable();
 
             $table->boolean('is_published')->default(false);
             $table->enum('status',['pending', 'approved', 'rejected'])->default('pending');

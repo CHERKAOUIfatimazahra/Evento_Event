@@ -30,7 +30,7 @@ class StoreEventRequest extends FormRequest
             'type' => 'required|in:Physical,Online',
             'price' => 'required|numeric|min:0',
             'tickets_available' => 'required|integer|min:0',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif',
+            'image' => 'nullable|image|mimes:png,jpeg,jpg,webp|max:2048',
             'user_id'=>'exists:users,id',
             'category_id'=> 'exists:catagories,id'
         ];
