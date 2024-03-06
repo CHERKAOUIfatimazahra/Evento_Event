@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Event;
 use App\Http\Requests\StoreEventRequest;
 use App\Http\Requests\UpdateEventRequest;
@@ -16,7 +17,7 @@ class EventController extends Controller
     {
         $events = Event::latest()->paginate(5);
         
-        return view('events.index',compact('events'))
+        return view('dashbord.events.index',compact('events'))
                     ->with('i', (request()->input('page', 1) - 1) * 5);
     }
  
@@ -25,28 +26,44 @@ class EventController extends Controller
      */
     public function create()
     {
-        return view('events.create');
+        $categories = Category::all();
+        return view('dashbord.events.create',compact('categories'));
     }
 
     /**
      * Store a newly created resource in storage.
      */
     public function store(StoreEventRequest $request)
-    {
-        $request->validated();
-
-        Event::create($request->all());
-         
-        return redirect()->route('events.index')
-                        ->with('success','events created successfully.');
+{
+    if ($request->hasFile('image')) {
+        $file = $request->file('image');
+        $imageFileName = time() . '.' . $file->getClientOriginalExtension();
+        $path = 'uploads/events/';
+        $file->move($path, $imageFileName);
     }
+    $event = Event::create([
+        'title' => $request->title,
+        'description' => $request->description,
+        'location' => $request->location,
+        'start_datetime' => $request->start_datetime,
+        'end_datetime' => $request->end_datetime,
+        'type' => $request->type,
+        'price' => $request->price,
+        'tickets_available' => $request->tickets_available,
+        'image' => $imageFileName,
+        'user_id' => auth()->id(),
+        'category_id' => $request->category,
+    ]);
+    return redirect()->route('events.index')
+                    ->with('success', 'Event created successfully.');
+}
 
     /**
      * Display the specified resource.
      */
     public function show(Event $event)
     {
-        return view('events.show',compact('event'));
+        return view('dashbord.events.show',compact('event'));
     }
 
     /**
@@ -54,7 +71,8 @@ class EventController extends Controller
      */
     public function edit(Event $event)
     {
-        return view('events.edit', compact('event'));
+        $categories = Category::all();
+        return view('dashbord.events.edit', compact('event','categories'));
     }
 
     /**
@@ -62,8 +80,29 @@ class EventController extends Controller
      */
     public function update(UpdateEventRequest $request, Event $event)
     {
-        $request->validated();
-        $event->update($request->validated());
+        $data = [
+            'title' => $request->title,
+            'description' => $request->description,
+            'location' => $request->location,
+            'start_datetime' => $request->start_datetime,
+            'end_datetime' => $request->end_datetime,
+            'type' => $request->type,
+            'price' => $request->price,
+            'tickets_available' => $request->tickets_available,
+            'user_id' => auth()->id(),
+            'category_id' => $request->category,
+        ];
+    
+        if ($request->hasFile('image')) {
+            $file = $request->file('image');
+            $extension = $file->getClientOriginalExtension();
+            $fileName = time() . '.' . $extension;
+            $path = 'uploads/events/';
+            $file->move($path, $fileName);
+            $data['image'] = $fileName;
+        }
+    
+        $event->update($data);
         
         return redirect()->route('events.index')
                         ->with('success','Event updated successfully');

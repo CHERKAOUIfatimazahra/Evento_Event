@@ -2,6 +2,7 @@
 
 
 use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
@@ -28,10 +29,6 @@ Route::view('/find-event', 'find-event');
 // Contact page
 Route::view('/contact', 'contact');
 
-// dashbord
-Route::view('/statistique', 'dashbord.statistique');
-Route::view('/users','dashbord.users.index');
-Route::view('/events','dashbord.events.index');
 // single pages
 Route::view('/business', 'page-categories.business');
 
@@ -53,9 +50,15 @@ Route::middleware('auth')->group(function () {
     // Logout route
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
+    // dashbord
+    Route::view('/statistique', 'dashbord.statistique');
+
     //dashbord users
     Route::resource('users',UserController::class);
     
     //dashbord events
     Route::resource('events',EventController::class);
+
+    //dashbord category
+    Route::resource('category',CategoryController::class);
 });

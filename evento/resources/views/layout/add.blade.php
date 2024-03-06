@@ -28,6 +28,7 @@
 
 <body class="">
     @include('partials.sidbar')
+    @include('partials.navbar')
     {{-- <x-success-message />
     <x-error-message /> --}}
 

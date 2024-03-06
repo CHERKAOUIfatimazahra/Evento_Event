@@ -31,6 +31,8 @@ class StoreEventRequest extends FormRequest
             'price' => 'required|numeric|min:0',
             'tickets_available' => 'required|integer|min:0',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif',
+            'user_id'=>'exists:users,id',
+            'category_id'=> 'exists:catagories,id'
         ];
     }
 }
