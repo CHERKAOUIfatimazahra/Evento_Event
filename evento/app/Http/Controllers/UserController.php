@@ -23,7 +23,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        // return view('dashbord.users.create');
     }
 
     /**
@@ -31,7 +31,14 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // $users = User::create([
+        //     'name' => $request->name,
+        //     'email'=> $re,
+        //     'password',
+            
+        // ]);
+        // return redirect()->route('events.index')
+        //                 ->with('success', 'Event created successfully.');
     }
 
     /**
@@ -63,6 +70,9 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        //
+        $user->delete();
+         
+        return redirect()->route('user.index')
+                        ->with('success','Event deleted successfully');
     } 
 }
