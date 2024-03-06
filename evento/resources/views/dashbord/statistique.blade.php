@@ -1,6 +1,7 @@
 @extends('layout.add')
 
 @section('content')
+
 <div class="p-4 sm:ml-64">
     <section class="bg-white p-3 sm:p-5">
         <div class="mx-auto max-w-screen-xl px-4 lg:px-12">
@@ -13,31 +14,31 @@
                                 <div class="px-4 py-5 sm:p-6">
                                     <dl>
                                         <dt class="text-sm leading-5 font-medium text-gray-500 truncate">Total Users</dt>
-                                        <dd class="mt-1 text-3xl leading-9 font-semibold text-indigo-600">1.6M</dd>
+                                        <dd class="mt-1 text-3xl leading-9 font-semibold text-indigo-600">{{ $users_count }}</dd>
                                     </dl>
                                 </div>
                             </div>
                             <div class="bg-white overflow-hidden shadow sm:rounded-lg">
                                 <div class="px-4 py-5 sm:p-6">
                                     <dl>
-                                        <dt class="text-sm leading-5 font-medium text-gray-500 truncate">Servers a month</dt>
-                                        <dd class="mt-1 text-3xl leading-9 font-semibold text-indigo-600">19.2K</dd>
+                                        <dt class="text-sm leading-5 font-medium text-gray-500 truncate">Total Events</dt>
+                                        <dd class="mt-1 text-3xl leading-9 font-semibold text-indigo-600">{{ $events_count }}</dd>
                                     </dl>
                                 </div>
                             </div>
                             <div class="bg-white overflow-hidden shadow sm:rounded-lg">
                                 <div class="px-4 py-5 sm:p-6">
                                     <dl>
-                                        <dt class="text-sm leading-5 font-medium text-gray-500 truncate">Servers a week</dt>
-                                        <dd class="mt-1 text-3xl leading-9 font-semibold text-indigo-600">4.9K</dd>
+                                        <dt class="text-sm leading-5 font-medium text-gray-500 truncate">Total Categories</dt>
+                                        <dd class="mt-1 text-3xl leading-9 font-semibold text-indigo-600">{{ $categories_count }}</dd>
                                     </dl>
                                 </div>
                             </div>
                             <div class="bg-white overflow-hidden shadow sm:rounded-lg">
                                 <div class="px-4 py-5 sm:p-6">
                                     <dl>
-                                        <dt class="text-sm leading-5 font-medium text-gray-500 truncate">Total users</dt>
-                                        <dd class="mt-1 text-3xl leading-9 font-semibold text-indigo-600">166.7K</dd>
+                                        <dt class="text-sm leading-5 font-medium text-gray-500 truncate">Total Roles</dt>
+                                        <dd class="mt-1 text-3xl leading-9 font-semibold text-indigo-600">{{ $roles_count }}</dd>
                                     </dl>
                                 </div>
                             </div>
@@ -48,4 +49,5 @@
         </div>
     </section>
 </div>
+
 @endsection
