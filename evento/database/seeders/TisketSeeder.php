@@ -12,6 +12,6 @@ class TisketSeeder extends Seeder
      */
     public function run(): void
     {
-       //
+        Ticket::factory()->count(50)->create();
     }
 }
