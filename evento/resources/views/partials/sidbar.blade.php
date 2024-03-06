@@ -154,7 +154,7 @@
         </a>
         <ul class="mt-6">
             <li>
-                <a href="/statistique"
+                <a href="/static-reservation"
                     class="text-black hover:text-blue-600 text-sm flex items-center hover:bg-blue-50 rounded px-4 py-3 transition-all">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="w-[18px] h-[18px] mr-4"
                         viewBox="0 0 512 512">

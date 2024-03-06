@@ -49,11 +49,13 @@ Route::middleware('guest')->group(function () {
 Route::group(['middleware' => ['auth', 'role:admin']], function() {
     Route::resource('users',UserController::class);
     Route::resource('categories',CategoryController::class);
+    Route::get('/statistique',[StaticController::class, 'statisTotal']);
 });
 
-Route::group(['middleware' => ['auth', 'role:admin,ogranizer']], function() {
-   Route::get('/statistique',[StaticController::class, 'index']);
+Route::group(['middleware' => ['auth', 'role:organizer']], function() {
+    Route::get('/static-reservation',[StaticController::class, 'reservationStatique']);
 });
+
 
 Route::middleware('auth')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
