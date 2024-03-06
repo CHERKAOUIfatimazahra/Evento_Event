@@ -50,6 +50,7 @@ Route::group(['middleware' => ['auth', 'role:admin']], function() {
     Route::resource('users',UserController::class);
     Route::resource('categories',CategoryController::class);
     Route::get('/statistique',[StaticController::class, 'statisTotal']);
+    Route::put("/changePublishedStatus/{event}",[EventController::class,"publicEvent"])->name("changePublishedStatus");
 });
 
 Route::group(['middleware' => ['auth', 'role:organizer']], function() {

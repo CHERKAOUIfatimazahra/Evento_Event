@@ -118,4 +118,11 @@ class EventController extends Controller
         return redirect()->route('events.index')
                         ->with('success','Event deleted successfully');
     }
+
+    public function publicEvent(Request $request, Event $event)
+    {
+        $event->is_published = $request->input("is_published");
+        $event->save();
+        return redirect()->route('events.index');
+    }
 }

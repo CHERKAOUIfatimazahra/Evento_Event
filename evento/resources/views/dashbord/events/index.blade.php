@@ -26,6 +26,11 @@
                                 <th scope="col" class="px-4 py-3">Location</th>
                                 <th scope="col" class="px-4 py-3">Start Date</th>
                                 <th scope="col" class="px-4 py-3">End Date</th>
+                                <th scope="col" class="px-4 py-3">Type</th>
+                                <th scope="col" class="px-4 py-3">price</th>
+                                <th scope="col" class="px-4 py-3">tickets_available</th>
+                                <th scope="col" class="px-4 py-3">publish</th>
+                                <th scope="col" class="px-4 py-3">status</th>
                                 <th scope="col" class="px-4 py-3">Actions</th>
                             </tr>
                         </thead>
@@ -36,6 +41,30 @@
                                 <td class="px-4 py-3">{{ $event->location }}</td>
                                 <td class="px-4 py-3">{{ $event->start_datetime }}</td>
                                 <td class="px-4 py-3">{{ $event->end_datetime }}</td>
+                                <td class="px-4 py-3">{{ $event->type }}</td>
+                                <td class="px-4 py-3">{{ $event->price }}</td>
+                                <td class="px-4 py-3">{{ $event->tickets_available }}</td>
+                                <td class="px-4 py-3">
+                                    @if($event->is_published )
+                                    <form method="post" action="{{route('changePublishedStatus',$event->id)}}">
+                                        @csrf
+                                        @method("PUT")
+                                        <input type="hidden" name="is_published" value="{{0}}">
+                                       <button class="px-2 rounded py-1 bg-red-500 white-text"> un published</button>
+                                    </form>
+                                     
+                                        @else
+                        
+                                            <form method="post" action="{{route("changePublishedStatus",$event->id)}}">
+                                                @csrf
+                                                @method("PUT")
+                                                <input type="hidden" name="is_published"  value="{{1}}">
+                                                <button class="px-2 rounded py-1 bg-green-500">published</button>
+                                            </form>
+                                             
+                                    @endif
+                                </td>
+                                <td class="px-4 py-3">{{ $event->status }}</td>
                                 <td class="px-4 py-3">
                                     <a href="{{ route('events.show', $event->id) }}" class="text-primary-600 hover:text-primary-900">View</a>
                                     <a href="{{ route('events.edit', $event->id) }}" class="text-indigo-600 hover:text-indigo-900">Edit</a>

@@ -231,7 +231,7 @@
             <h1 class="text-center text-3xl font-bold">Find your events</h1>
             <div class="relative flex justify-center overflow-hidden py-6 sm:py-12">
                 <div class="flex flex-wrap justify-center">
-                    @foreach ($events as $event)
+                    @foreach ($publishedEvents as $event)
                         <div class="m-3">
                             <x-events-cards :event="$event"></x-events-cards>
                         </div>
@@ -239,7 +239,7 @@
                 </div>
             </div>
         </div>
-        {{ $events->links() }} <!-- Pagination links -->
+        {{ $publishedEvents->links() }} <!-- Pagination links -->
     </section>
     {{-- end section --}}
 

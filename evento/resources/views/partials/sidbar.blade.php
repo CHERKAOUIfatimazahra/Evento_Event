@@ -1,5 +1,5 @@
 {{-- role = admin --}}
-@if('role:admin')
+@if(auth()->user()->hasRole('admin'))
     <nav class="bg-white shadow-lg h-screen fixed top-0 left-0 min-w-[250px] py-6 px-4 font-[sans-serif] overflow-auto">
         <a href="/">
             <img src="{{ asset('images/logo.png') }}" height="100" width="100" class="">
@@ -147,7 +147,7 @@
 @endif
 
 {{-- role =  ogranizer --}} 
-@if('role:organizer')
+@if(auth()->user()->hasRole('organizer'))
     <nav class="bg-white shadow-lg h-screen fixed top-0 left-0 min-w-[250px] py-6 px-4 font-[sans-serif] overflow-auto">
         <a href="/">
             <img src="{{ asset('images/logo.png') }}" height="100" width="100" class="">
@@ -220,7 +220,7 @@
 @endif
 
 {{-- role = spectator --}}
-@if('role:spectator')
+@if(auth()->user()->hasRole('spectator'))
     <nav class="bg-white shadow-lg h-screen fixed top-0 left-0 min-w-[250px] py-6 px-4 font-[sans-serif] overflow-auto">
         <a href="/">
             <img src="{{ asset('images/logo.png') }}" height="100" width="100" class="">

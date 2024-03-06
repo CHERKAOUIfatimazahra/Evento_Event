@@ -9,9 +9,8 @@ class HomeController extends Controller
 {
     public function index()
     {
-        $events = Event::latest()->paginate(6);
-        
-        return view('home',compact('events'))
-                    ->with('i', (request()->input('page', 1) - 1) * 5);
+        $publishedEvents = Event::where('is_published', 1)->latest()->paginate(5);
+
+        return view('home', compact('publishedEvents'));
     }
 }
