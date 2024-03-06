@@ -16,6 +16,7 @@ return new class extends Migration
             $table->foreignId('event_id')->constrained();
             $table->foreignId('user_id')->constrained();
             $table->string('place');
+            $table->enum('status_reservation',['pending', 'approved', 'rejected'])->default('pending');
         });
     }
 
