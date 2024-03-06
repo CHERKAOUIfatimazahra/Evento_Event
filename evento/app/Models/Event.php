@@ -19,6 +19,8 @@ class Event extends Model
         'price', 
         'tickets_available', 
         'image', 
+        'is_published',
+        'reservation_type',
         'user_id',
         'category_id'
     ];
