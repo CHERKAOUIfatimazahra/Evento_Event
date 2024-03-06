@@ -13,7 +13,7 @@ class CategoryController extends Controller
      * Display a listing of the resource.
      */
     public function index()
-    {
+    { 
         $categories = category::latest()->paginate(5);
         
         return view('dashbord.categories.index',compact('categories'))
