@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\DB;
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory
  */
-class TicketFactory extends Factory
+class ReservationFactory extends Factory
 {
     /**
      * Define the model's default state.
