@@ -21,7 +21,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 // Home page
-Route::view('/', 'home');
+// Route::view('/', 'home');
 Route::get('/', [HomeController::class, 'index']);
 
 // find event pages
@@ -50,19 +50,16 @@ Route::middleware('guest')->group(function () {
 Route::middleware('auth')->group(function () {
     // Logout route
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
-
-    // dashbord
-    Route::get('/statistique',[StaticController::class, 'index']);
-
-    //dashbord users
-    Route::resource('users',UserController::class);
-    
+    //dashbord profile
+    Route::view('/profile','dashbord.profile');
     //dashbord events
     Route::resource('events',EventController::class);
 
-    //dashbord category
-    Route::resource('categories',CategoryController::class);
+    // dashbord statistique
+    Route::get('/statistique',[StaticController::class, 'index'])->middleware('role:admin|ogranizer');
 
-    //dashbord profile
-    Route::view('/profile','dashbord.profile');
+    //dashbord users
+    Route::resource('users',UserController::class)->middleware('role:admin');
+    //dashbord category
+    Route::resource('categories',CategoryController::class)->middleware('role:admin');
 });

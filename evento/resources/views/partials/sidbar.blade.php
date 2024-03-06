@@ -1,5 +1,7 @@
 <nav class="bg-white shadow-lg h-screen fixed top-0 left-0 min-w-[250px] py-6 px-4 font-[sans-serif] overflow-auto">
-    <img src="images/logo.png" height="100" width="100" class="">
+    <a href="/">
+        <img src="{{ asset('images/logo.png') }}" height="100" width="100" class="">
+    </a>
     <ul class="mt-6">
         <li>
             <a href="/statistique"
