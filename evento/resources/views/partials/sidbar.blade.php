@@ -30,7 +30,7 @@
                 </a>
             </li>
             <li>
-                <a href=""
+                <a href="{{ route('events.index') }}"
                     class="text-black hover:text-blue-600 text-sm flex items-center hover:bg-blue-50 rounded px-4 py-3 transition-all">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="w-[18px] h-[18px] mr-4"
                         viewBox="0 0 24 24">
@@ -43,7 +43,7 @@
                     <span>Events</span>
                 </a>
             </li>
-            <li>
+            {{-- <li>
                 <a href=""
                     class="text-black hover:text-blue-600 text-sm flex items-center hover:bg-blue-50 rounded px-4 py-3 transition-all">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="w-[18px] h-[18px] mr-4"
@@ -58,8 +58,8 @@
                     </svg>
                     <span>Roles</span>
                 </a>
-            </li>
-            <li>
+            </li> --}}
+            {{-- <li>
                 <a href=""
                     class="text-black hover:text-blue-600 text-sm flex items-center hover:bg-blue-50 rounded px-4 py-3 transition-all">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="w-[18px] h-[18px] mr-4"
@@ -73,14 +73,14 @@
                     </svg>
                     <span>Permission</span>
                 </a>
-            </li>
+            </li> --}}
         </ul>
     </div>
     <div class="mt-6">
         <h6 class="text-blue-600 text-sm font-bold px-4">Income</h6>
         <ul class="mt-3">
             <li>
-                <a href=""
+                <a href="{{ route('categories.index') }}"
                     class="text-black hover:text-blue-600 text-sm flex items-center hover:bg-blue-50 rounded px-4 py-3 transition-all">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="w-[18px] h-[18px] mr-4"
                         viewBox="0 0 511.877 511.877">
@@ -91,7 +91,7 @@
                     <span>Categories</span>
                 </a>
             </li>
-            <li>
+            {{-- <li>
                 <a href=""
                     class="text-black hover:text-blue-600 text-sm flex items-center hover:bg-blue-50 rounded px-4 py-3 transition-all">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="w-[18px] h-[18px] mr-4"
@@ -105,7 +105,7 @@
                     </svg>
                     <span>Subcategories</span>
                 </a>
-            </li>
+            </li> --}}
         </ul>
     </div>
     <div class="mt-6">

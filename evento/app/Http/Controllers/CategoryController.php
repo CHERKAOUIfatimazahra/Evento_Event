@@ -16,7 +16,7 @@ class CategoryController extends Controller
     {
         $categories = category::latest()->paginate(5);
         
-        return view('categories.index',compact('categories'))
+        return view('dashbord.categories.index',compact('categories'))
                     ->with('i', (request()->input('page', 1) - 1) * 5);
     }
  
@@ -25,7 +25,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        return view('categories.create');
+        return view('dashbord.categories.create');
     }
 
     /**
@@ -35,18 +35,12 @@ class CategoryController extends Controller
     {
         $request->validated();
 
-        Category::create($request->all());
+        Category::create([
+            'name' => $request->name,
+        ]);
          
         return redirect()->route('categories.index')
                         ->with('success','categories created successfully.');
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(Category $category)
-    {
-        return view('categories.show',compact('category'));
     }
 
     /**
@@ -54,7 +48,7 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
-        return view('categories.edit', compact('category'));
+        return view('dashbord.categories.edit', compact('category'));
     }
 
     /**
@@ -62,8 +56,9 @@ class CategoryController extends Controller
      */
     public function update(UpdateCategoryRequest $request, Category $category)
     {
-        $request->validated();
-        $category->update($request->validated());
+        $category->update([
+            'name' => $request->name,
+        ]);
         
         return redirect()->route('categories.index')
                         ->with('success','category updated successfully');

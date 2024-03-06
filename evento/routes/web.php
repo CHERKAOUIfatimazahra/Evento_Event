@@ -60,5 +60,5 @@ Route::middleware('auth')->group(function () {
     Route::resource('events',EventController::class);
 
     //dashbord category
-    Route::resource('category',CategoryController::class);
+    Route::resource('categories',CategoryController::class);
 });
