@@ -21,7 +21,6 @@ use Illuminate\Support\Facades\Route;
 */
 
 // Home page
-// Route::view('/', 'home');
 Route::get('/', [HomeController::class, 'index']);
 
 // find event pages
@@ -47,19 +46,17 @@ Route::middleware('guest')->group(function () {
     Route::post('/reset-password', [AuthController::class, 'resetPassword'])->name('password.update');
 });
 
+Route::group(['middleware' => ['auth', 'role:admin']], function() {
+    Route::resource('users',UserController::class);
+    Route::resource('categories',CategoryController::class);
+});
+
+Route::group(['middleware' => ['auth', 'role:admin,ogranizer']], function() {
+   Route::get('/statistique',[StaticController::class, 'index']);
+});
+
 Route::middleware('auth')->group(function () {
-    // Logout route
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
-    //dashbord profile
     Route::view('/profile','dashbord.profile');
-    //dashbord events
     Route::resource('events',EventController::class);
-
-    // dashbord statistique
-    Route::get('/statistique',[StaticController::class, 'index'])->middleware('role:admin|ogranizer');
-
-    //dashbord users
-    Route::resource('users',UserController::class)->middleware('role:admin');
-    //dashbord category
-    Route::resource('categories',CategoryController::class)->middleware('role:admin');
 });
