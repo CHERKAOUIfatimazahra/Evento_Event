@@ -22,7 +22,7 @@
     @endif
 
     <section class="bg-white">
-        <div class="py-8 px-4 mx-auto max-w-2xl lg:py-16">
+        <div class="py-4 mx-auto max-w-2xl lg:py-16">
             <h2 class="mb-4 text-xl font-bold text-gray-900">Add a new Event</h2>
             <form action="{{ route('events.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
@@ -36,7 +36,7 @@
                             <span class="text-red-500">{{ $message }}</span>
                         @enderror
                     </div>
-                    <div>
+                    <div class="sm:col-span-2">
                         <label for="description"
                             class="block mb-2 text-sm font-medium text-gray-900">Description</label>
                         <textarea name="description" id="description" rows="8"
@@ -46,7 +46,7 @@
                             <span class="text-red-500">{{ $message }}</span>
                         @enderror
                     </div>
-                    <div>
+                    <div class="sm:col-span-2">
                         <label for="location" class="block mb-2 text-sm font-medium text-gray-900">Location</label>
                         <input type="text" name="location" id="location"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
@@ -83,6 +83,17 @@
                             <option value="Online" {{ old('type') === 'Online' ? 'selected' : '' }}>Online</option>
                         </select>
                         @error('type')
+                            <span class="text-red-500">{{ $message }}</span>
+                        @enderror
+                    </div>
+                    <div>
+                        <label for="reservation_type" class="block mb-2 text-sm font-medium text-gray-900">Reservation Type</label>
+                        <select name="reservation_type" id="reservation_type"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                            <option value="automatique" {{ old('reservation_type') === 'automatique' ? 'selected' : '' }}>Automatique</option>
+                            <option value="manuelle" {{ old('reservation_type') === 'manuelle' ? 'selected' : '' }}>Manuelle</option>
+                        </select>
+                        @error('reservation_type')
                             <span class="text-red-500">{{ $message }}</span>
                         @enderror
                     </div>

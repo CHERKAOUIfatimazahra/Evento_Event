@@ -46,6 +46,10 @@ class User extends Authenticatable
 
     public function events()
     {
-        return $this->hasMany(Event::class)->withPivot('quantity', 'place');
+        return $this->hasMany(Event::class);
+    }
+    public function reserve()
+    {
+        return $this->hasMany(Reservation::class)->withPivot('place','status');
     }
 }

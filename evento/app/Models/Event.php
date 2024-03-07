@@ -26,10 +26,11 @@ class Event extends Model
     ];
     public function users()
     {
-        return $this->hasMany(User::class)->withPivot('quantity', 'place');
+        return $this->hasMany(User::class);
     }
     public function categories()
     {
         return $this->belongsTo(Category::class);
     }
+
 }
