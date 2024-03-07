@@ -21,20 +21,20 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Home page
-Route::get('/', [HomeController::class, 'index']);
 
-// find event pages
-Route::view('/find-event', 'find-event');
 
-// Contact page
-Route::view('/contact', 'contact');
-
-// single pages
-Route::view('/business', 'page-categories.business');
-
-// Authentication routes
 Route::middleware('guest')->group(function () {
+    // Home page
+    Route::get('/', [HomeController::class, 'index']);
+    Route::get('/single_page/{event}', [HomeController::class, 'eventShow'])->name('events.eventShow');
+    
+    // find event pages
+    Route::view('/find-event', 'find-event');
+    // Contact page
+    Route::view('/contact', 'contact');
+    // single pages
+    Route::view('/business', 'page-categories.business');
+
     Route::get('/login', [AuthController::class, 'index'])->name('login.index');
     Route::get('/register', [AuthController::class, 'create'])->name('register.index');
     Route::post('/login', [AuthController::class, 'login'])->name('login');
@@ -51,11 +51,11 @@ Route::group(['middleware' => ['auth', 'role:admin']], function() {
     Route::resource('users',UserController::class);
     Route::resource('categories',CategoryController::class);
     Route::get('/statistique',[StaticController::class, 'statisTotal']);
-    Route::put("/changePublishedStatus/{event}",[EventController::class,"publicEvent"])->name("changePublishedStatus");
-    
+    Route::put("/changePublishedStatus/{event}",[EventController::class,"publicEvent"])->name("changePublishedStatus");  
 });
 
 Route::group(['middleware' => ['auth', 'role:organizer']], function() {
+    Route::resource('events',EventController::class);
     Route::get('/static-reservation',[StaticController::class, 'reservationStatique']);
     Route::get('/events/{eventId}/reservations', [ReservationController::class, 'index'])->name('events.reservations.index');
     Route::put('/reservation/{id}/update-status', [ReservationController::class, 'updateStatus'])->name('reservations.updateStatus');
@@ -65,6 +65,5 @@ Route::group(['middleware' => ['auth', 'role:organizer']], function() {
 Route::middleware('auth')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
     Route::view('/profile','dashbord.profile');
-    Route::resource('events',EventController::class);
     Route::post('/events/{eventId}/reserve', [ReservationController::class, 'reservation'])->name('events.reserve');
 });

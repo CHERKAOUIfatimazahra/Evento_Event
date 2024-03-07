@@ -13,4 +13,9 @@ class HomeController extends Controller
 
         return view('home', compact('publishedEvents'));
     }
+    public function eventShow(Event $event)
+    {
+        return view('single_page', compact('event')); 
+    }
+
 }
