@@ -73,6 +73,7 @@
                                         @method('DELETE')
                                         <button type="submit" class="text-red-600 hover:text-red-900">Delete</button>
                                     </form>
+                                    <a href="{{ route('events.reservations.index', $event->id) }}" class="text-green-600 hover:text-green-900">Reservation</a>
                                 </td>
                             </tr>
                             @endforeach
