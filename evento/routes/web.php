@@ -6,6 +6,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ReservationController;
+use App\Http\Controllers\SearchController;
 use App\Http\Controllers\StaticController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -29,7 +30,11 @@ Route::middleware('guest')->group(function () {
     Route::get('/single_page/{event}', [HomeController::class, 'eventShow'])->name('events.eventShow');
     
     // find event pages
-    Route::view('/find-event', 'find-event');
+    Route::get('/find-event', [HomeController::class,'findEvent']);
+    Route::get('/filter',[SearchController::class,'index']);
+    Route::get('/search', [SearchController::class, 'search']); 
+    Route::get('/search/{ids}', [SearchController::class, 'filterByCategory']);
+
     // Contact page
     Route::view('/contact', 'contact');
     // single pages
@@ -60,7 +65,6 @@ Route::group(['middleware' => ['auth', 'role:organizer']], function() {
     Route::get('/events/{eventId}/reservations', [ReservationController::class, 'index'])->name('events.reservations.index');
     Route::put('/reservation/{id}/update-status', [ReservationController::class, 'updateStatus'])->name('reservations.updateStatus');
 });
-
 
 Route::middleware('auth')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');

@@ -17,5 +17,11 @@ class HomeController extends Controller
     {
         return view('single_page', compact('event')); 
     }
+    public function findEvent()
+    {
+        $publishedEvents = Event::where('is_published', 1)->latest()->paginate(5);
+
+        return view('find-event', compact('publishedEvents'));
+    }
 
 }
