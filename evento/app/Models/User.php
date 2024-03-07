@@ -50,6 +50,6 @@ class User extends Authenticatable
     }
     public function reserve()
     {
-        return $this->hasMany(Reservation::class)->withPivot('place','status');
+        return $this->hasMany(Reservation::class);
     }
 }

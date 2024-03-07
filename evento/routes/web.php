@@ -54,12 +54,10 @@ Route::group(['middleware' => ['auth', 'role:admin']], function() {
     Route::put("/changePublishedStatus/{event}",[EventController::class,"publicEvent"])->name("changePublishedStatus");
     Route::get('/events/{eventId}/reservations', [ReservationController::class, 'index'])->name('events.reservations.index');
     Route::put('/reservations/{id}/update-status', [ReservationController::class, 'updateStatus'])->name('reservations.updateStatus');
-    
 });
 
 Route::group(['middleware' => ['auth', 'role:organizer']], function() {
     Route::get('/static-reservation',[StaticController::class, 'reservationStatique']);
-
 });
 
 
