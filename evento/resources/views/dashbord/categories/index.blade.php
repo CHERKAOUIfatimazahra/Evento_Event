@@ -6,6 +6,22 @@
         <div class="mx-auto max-w-screen-xl px-4 lg:px-12">
             <div class="bg-white shadow-md sm:rounded-lg overflow-hidden">
                 <div class="flex flex-col md:flex-row items-center justify-between space-y-3 md:space-y-0 md:space-x-4 p-4">
+                    <div class="flex justify-center">
+                        @if ($message = Session::get('success'))
+                            <div
+                                class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative w-full sm:w-1/2 lg:w-1/3">
+                                <strong class="font-bold">Success!</strong>
+                                <p>{{ $message }}</p>
+                            </div>
+                        @endif
+                        @if ($message = Session::get('error'))
+                            <div
+                                class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative w-full sm:w-1/2 lg:w-1/3">
+                                <strong class="font-bold">Error!</strong>
+                                <p>{{ $message }}</p>
+                            </div>
+                        @endif
+                    </div>
                     <div class="w-full md:w-1/2">
                         <!-- Search Form (if needed) -->
                     </div>
