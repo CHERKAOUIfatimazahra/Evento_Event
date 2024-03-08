@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Event;
 use Illuminate\Http\Request;
 
@@ -19,9 +20,10 @@ class HomeController extends Controller
     }
     public function findEvent()
     {
+        $categories = Category::get();
         $publishedEvents = Event::where('is_published', 1)->latest()->paginate(5);
 
-        return view('find-event', compact('publishedEvents'));
+        return view('find-event', compact('publishedEvents','categories'));
     }
 
 }
