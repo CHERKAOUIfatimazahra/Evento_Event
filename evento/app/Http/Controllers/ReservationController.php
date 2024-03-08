@@ -23,10 +23,10 @@ class ReservationController extends Controller
         $user = auth()->user();
         $event = Event::findOrFail($eventId);
 //cheque reservation date 
-        $currentTime = Carbon::now();
-        if ($currentTime->lt($event->start_datetime) || $currentTime->gt($event->end_datetime)) {
-            return redirect()->back()->with('error', 'Sorry, you cannot reserve for events outside the event timeframe.');
-        }
+        // $currentTime = Carbon::now();
+        // if ($currentTime->lt($event->start_datetime) || $currentTime->gt($event->end_datetime)) {
+        //     return redirect()->back()->with('error', 'Sorry, you cannot reserve for events outside the event timeframe.');
+        // }
 //cheque user reservation
         $existingReservation = Reservation::where('event_id', $eventId)
                                       ->where('user_id', $user->id)

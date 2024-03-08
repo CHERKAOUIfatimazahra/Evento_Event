@@ -34,13 +34,7 @@ class AuthController extends Controller
         if ($this->authRepository->login($credentials)) {
 
             $request->session()->regenerate();
-
-            if ('role' === 'organizer'){
-                return redirect('/statistique');
-            }else{
-                return redirect('/');
-            } 
-
+                return redirect('/profile');
         }
 
         return back()->withInput($request->only('email'));

@@ -5,8 +5,7 @@
         <section class="bg-white p-3 sm:p-5">
             <div class="mx-auto max-w-screen-xl px-4 lg:px-12">
                 <div class="bg-white shadow-md sm:rounded-lg overflow-hidden">
-                    <div
-                        class="flex flex-col md:flex-row items-center justify-between space-y-3 md:space-y-0 md:space-x-4 p-4">
+                    <div class="flex flex-col md:flex-row items-center justify-between space-y-3 md:space-y-0 md:space-x-4 p-4">
                         <div class="w-full md:w-1/2">
                             <!-- Search Form (if needed) -->
                         </div>
@@ -26,6 +25,7 @@
                         @endif
                     </div>
                     <div class="overflow-x-auto">
+                        
                         <table class="w-full text-sm text-left text-gray-500">
                             <thead class="text-xs text-gray-700 uppercase bg-gray-50">
                                 <tr>
@@ -36,7 +36,7 @@
                             </thead>
                             <tbody>
                                 @if ($reservations->isEmpty())
-                                    <p>Pas de réservation effectuée.</p>
+                                    <p>No resrvation.</p>
                                 @else
                                     @foreach ($reservations as $reservation)
                                         <tr class="border-b">
@@ -44,19 +44,24 @@
                                             <td class="px-4 py-3">{{ $reservation->place }}</td>
                                             <td class="px-4 py-3">
                                                 {{ $reservation->status }}
+
+                                                @if ($reservation->status_reservation === 'pending')
+                                                    <div class="mt-4 text-red-500">reservation of
+                                                        {{ $reservation->event->title }} is pending.</div>
+                                                @elseif ($reservation->status_reservation === 'approved')
+                                                    <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                                                        Télécharger
+                                                    </button>
                                             </td>
-                                            @if ($reservation->status === 'en_attente')
-                                                <div class="mt-4 text-red-500">La réservation de
-                                                    {{ $reservation->event->titre }} est en attente de réponse.</div>
-                                            @elseif ($reservation->status === 'acceptée')
-                                                <button
-                                                    class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                                                    Télécharger
-                                                </button>
-                                            @endif
-                                            {{-- <td class="px-4 py-3">
-                                            <a href="{{ route('reservations.show', $reservation->id) }}" class="text-primary-600 hover:text-primary-900">View</a>
-                                        </td> --}}
+                                            <td class="px-4 py-3">
+                                                <a href="{{ route('user.reservation.details', ['userId' => auth()->user()->id, 'reservationId' => $reservation->id]) }}"
+                                                    class="text-primary-600 hover:text-primary-900">View Reservation Details</a>
+                                            </td>
+                                        @elseif($reservation->status_reservation === 'rejected')
+                                            <div class="mt-4 text-red-500">reservation of
+                                                {{ $reservation->event->title }} is rejected</div>
+                                        @endif
+                                        </td>
                                         </tr>
                                     @endforeach
                                 @endif

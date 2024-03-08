@@ -31,7 +31,6 @@ class UpdateEventRequest extends FormRequest
             'price' => 'required|numeric|min:0',
             'tickets_available' => 'required|integer|min:0',
             'image' => 'nullable|image|mimes:png,jpeg,jpg,webp|max:2048',
-            'reservation_type' => 'required',
             'user_id'=>'exists:users,id',
             'category_id'=> 'exists:catagories,id'
         ];

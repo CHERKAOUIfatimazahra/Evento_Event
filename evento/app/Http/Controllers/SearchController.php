@@ -21,17 +21,18 @@ class SearchController extends Controller
         $categories = Category::get();
         if ($request->category) {
             $event->where('title', 'LIKE', '%' . $request->search_input . '%')
-                    ->where('category_id', $request->category);
+                    ->where('category_id', $request->category)->where("is_published" , 1);
         }
 
         else{
-            $event->where('title', 'LIKE', '%' . $request->search_input . '%');
+            $event->where('title', 'LIKE', '%' . $request->search_input . '%')->where("is_published" , 1);
         }
 
         
         $filteredEvents = $event->get();
-
+                if($filteredEvents->count())
         return response()->json(['events' => $filteredEvents]);
+    else   response()->json(['events' => 0]);
     }
 
     public function filterByCategory($ids)

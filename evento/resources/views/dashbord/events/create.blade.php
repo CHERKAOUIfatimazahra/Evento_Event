@@ -21,7 +21,7 @@
         </div>
     @endif
 
-    <section class="bg-white">
+    <section class="bg-white" >
         <div class="py-4 mx-auto max-w-2xl lg:py-16">
             <h2 class="mb-4 text-xl font-bold text-gray-900">Add a new Event</h2>
             <form action="{{ route('events.store') }}" method="POST" enctype="multipart/form-data">

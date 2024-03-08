@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="p-4 sm:ml-64">
-        <section class="bg-white p-3 sm:p-5">
+        <section class="bg-white p-3 sm:p-5" style="background-image: url('https://cdn1.vectorstock.com/i/1000x1000/79/30/events-background-with-maple-leaves-vector-10537930.jpg')">
             <div class="mx-auto max-w-screen-xl px-4 lg:px-12">
                 <div class="bg-white shadow-md sm:rounded-lg overflow-hidden">
                     <div

@@ -88,7 +88,7 @@
         </div>
     </section>
 
-    <section class="bg-gray-100 py-6 p-20">
+    {{-- <section class="bg-gray-100 py-6 p-20">
         <div class="container relative z-40 mx-auto mt-12">
             <div class="flex flex-wrap justify-center mx-auto lg:w-full md:w-5/6 xl:shadow-small-blue">
 
@@ -193,13 +193,13 @@
 
             </div>
         </div>
-    </section>
+    </section> --}}
 
     {{-- section for filter and events carts --}}
     <section>
         {{-- start filter --}}
         <div class="flex items-center justify-center py-4 md:py-8 flex-wrap">
-            <form action="" method="GET">
+            {{-- <form action="" method="GET">
                 <button type="submit" name="category" value="all"
                     class="category-btn text-black-700 hover:text-white border border-purple-600 bg-white hover:bg-purple-700 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-full text-base font-medium px-5 py-2.5 text-center me-3 mb-3 transition-all">
                     All categories</button>
@@ -223,7 +223,7 @@
                 <button type="submit" name="category" value="gaming"
                     class="category-btn text-black-700 hover:text-white border border-purple-600 bg-white hover:bg-purple-700 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-full text-base font-medium px-5 py-2.5 text-center me-3 mb-3 transition-all">
                     Gaming</button>
-            </form>
+            </form> --}}
         </div>
         <div class="flex justify-center">
             @if ($message = Session::get('success'))

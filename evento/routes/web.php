@@ -53,12 +53,13 @@ use Illuminate\Support\Facades\Route;
 Route::group(['middleware' => ['auth', 'role:admin']], function() {
     Route::resource('users',UserController::class);
     Route::resource('categories',CategoryController::class);
+    Route::get('events.index',[EventController::class, 'index']);
     Route::get('/statistique',[StaticController::class, 'statisTotal']);
     Route::put("/changePublishedStatus/{event}",[EventController::class,"publicEvent"])->name("changePublishedStatus");  
 });
 
 Route::group(['middleware' => ['auth', 'role:organizer']], function() {
-
+    Route::resource('events',EventController::class);
     Route::get('/static-reservation',[StaticController::class, 'reservationStatique']);
     Route::get('/events/{eventId}/reservations', [ReservationController::class, 'index'])->name('events.reservations.index');
     Route::put('/reservation/{id}/update-status', [ReservationController::class, 'updateStatus'])->name('reservations.updateStatus');
@@ -66,9 +67,8 @@ Route::group(['middleware' => ['auth', 'role:organizer']], function() {
 
 Route::middleware('auth')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
-    Route::resource('events',EventController::class);
     Route::view('/profile','dashbord.profile');
     Route::post('/events/{eventId}/reserve', [ReservationController::class, 'reservation'])->name('events.reserve');
     Route::get('/user/{userId}/reservations', [TicketController::class, 'showReservations'])->name('user.reservations');
-    Route::get('/event/{event}', [TicketController::class, 'userReservations'])->name('event.reservations');
+    Route::get('/user/{userId}/reservation/{reservationId}', [TicketController::class, 'userReservations'])->name('user.reservation.details');
 });

@@ -6,15 +6,15 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
+     /**
      * Run the migrations.
      */
     public function up(): void
     {
         Schema::create('reservations', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('event_id')->constrained();
-            $table->foreignId('user_id')->constrained();
+            $table->foreignId('event_id')->constrained('events');
+            $table->foreignId('user_id')->constrained('users');
             $table->string('place');
             $table->enum('status_reservation',['pending', 'approved', 'rejected'])->default('pending');
             $table->timestamps();
@@ -26,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('events_users');
+        Schema::dropIfExists('reservations');
     }
 };

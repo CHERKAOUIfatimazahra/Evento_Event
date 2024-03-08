@@ -45,7 +45,7 @@
                     <input type="search" id="default-search"
                         class="block p-4 pl-10 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 white:bg-gray-700 white:border-gray-600 white:placeholder-gray-400 white:text-white white:focus:ring-blue-500 white:focus:border-blue-500"
                         placeholder="Search Mockups, Logos..." required>
-                    <button type="submit" id="searchBtn"
+                    <button id="searchBtn"
                         class="text-white absolute right-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Search</button>
                 </div>
                 <label for="category" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Category
@@ -53,7 +53,7 @@
                 <select id="category" name="name"
                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     required>
-                     
+
                     <option value="0" selected>All</option>
                     @foreach ($categories as $category)
                         <option value="{{ $category->id }}">{{ $category->name }}</option>
@@ -77,24 +77,18 @@
             </div>
         </div>
     </section>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
-    </script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
-    </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
         integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script>
+{{--saorch--}}
+    <script> 
         $(document).ready(function() {
-
             $('#searchForm').submit(function(e) {
                 e.preventDefault();
                 var search_input = $('#default-search').val();
                 var token = $("meta[name='csrf-token']").attr("content");
                 var category = $("#category").val();
+                console.log(category)
                 $.ajax({
                     type: 'GET',
                     url: '/search',
@@ -102,8 +96,7 @@
                         'XSRF-TOKEN': token
                     },
                     data: {
-                        search_input: search_input
-                        ,
+                        search_input: search_input,
                         category: category
                     },
                     success: function(response) {
@@ -111,86 +104,60 @@
                     }
                 });
             });
-        });
 
-        function table_post_row(events) {
-            let htmlView = '';
-            if (events.length <= 0) {
-                htmlView += `<p>No events found</p>`;
-            } else {
-                $("#placeSearchResult").html("");
-                events.forEach(event => {
-                    $("#placeSearchResult").append(`
-            <div>
-    <div class="relative flex justify-center overflow-hidden bg-gray-200 py-6 sm:py-12">
-        <div class="flex flex-wrap justify-center">
-            <div class="m-3 max-w-xs md:max-w-2xl border border-white bg-white rounded-xl shadow-lg p-6">
-                <div class="md:flex md:space-x-5 space-y-3 md:space-y-0">
-                    <div class="md:w-1/3">
-                        <img src="http://127.0.0.1:8000/uploads/events/${event.image}" alt="${event.name}"
-                            class="rounded-xl w-full h-48 object-cover">
+            function table_post_row(events) {
+                  $("#placeSearchResult").html("");
+              if (events) {
+                    events.forEach(event => {
+                        $("#placeSearchResult").append(`
+                <div class="relative flex w-full max-w-[26rem] flex-col rounded-xl bg-white bg-clip-border text-gray-700 shadow-lg">
+                    <div class="relative mx-4 mt-4 overflow-hidden rounded-xl bg-blue-gray-500 bg-clip-border text-white shadow-lg shadow-blue-gray-500/40">
+                        <img src="http://127.0.0.1:8000/uploads/events/${event.image}" alt="${event.name}" class="rounded-xl w-full h-48 object-cover" />
+                        <div class="to-bg-black-10 absolute inset-0 h-full w-full bg-gradient-to-tr from-transparent via-transparent to-black/60"></div>
+                        <button class="!absolute top-4 right-4 h-8 max-h-[32px] w-8 max-w-[32px] select-none rounded-full text-center align-middle font-sans text-xs font-medium uppercase text-red-500 transition-all hover:bg-red-500/10 active:bg-red-500/30 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none" type="button" data-ripple-dark="true">
+                            <span class="absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 transform">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" class="h-6 w-6">
+                                    <path d="M11.645 20.91l-.007-.003-.022-.012a15.247 15.247 0 01-.383-.218 25.18 25.18 0 01-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0112 5.052 5.5 5.5 0 0116.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 01-4.244 3.17 15.247 15.247 0 01-.383.219l-.022.012-.007.004-.003.001a.752.752 0 01-.704 0l-.003-.001z"></path>
+                                </svg>
+                            </span>
+                        </button>
                     </div>
-                    <div class="md:w-2/3 flex flex-col space-y-2 p-3">
-                        <div class="flex justify-between item-center">
-                            <p class="text-gray-500 font-medium hidden md:block">${event.category_id}</p>
-                            <div class="flex items-center">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-yellow-500"
-                                    viewBox="0 0 20 20" fill="currentColor">
-                                    <path
-                                        d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                    <div class="p-6">
+                        <div class="mb-3 flex items-center justify-between">
+                            <h3 class="block font-sans text-xl font-medium leading-snug tracking-normal text-blue-gray-900 antialiased">${event.title}</h3>
+                            <p class="flex items-center gap-1.5 font-sans text-base font-normal leading-relaxed text-blue-gray-900 antialiased">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" class="-mt-0.5 h-5 w-5 text-yellow-700">
+                                    <path fill-rule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z" clip-rule="evenodd"></path>
                                 </svg>
-                                <p class="text-gray-600 font-bold text-sm ml-1">
-                                    ${event.type}
-                                    <span class="text-gray-500 font-normal">(76 reviews)</span>
-                                </p>
-                            </div>
-                            <div class="">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-pink-500"
-                                    viewBox="0 0 20 20" fill="currentColor">
-                                    <path fill-rule="evenodd"
-                                        d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z"
-                                        clip-rule="evenodd" />
-                                </svg>
-                            </div>
-                            <div
-                                class="bg-gray-200 px-3 py-1 rounded-full text-xs font-medium text-gray-800 hidden md:block">
                                 ${event.type}
-                            </div>
+                            </p>
                         </div>
-                        <h3 class="font-black text-gray-800 md:text-3xl text-xl">${event.name}</h3>
-                        <p class="md:text-lg text-gray-500 text-base h-16 overflow-hidden">${event.description}</p>
-                        <p class="text-xl font-black text-gray-800">
-                            ${event.price}
-                            <span class="font-normal text-gray-600 text-base">/night</span>
-                        </p>
-                        <div class="flex justify-center mt-4">
-                            <form action="/events/${event.id}/reserve" method="POST">
-                                @csrf
-                                <button type="submit"
-                                    class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">
-                                    Reserve Now
-                                </button>
-                            </form>
-                            <form action="/single_page/${event}" method="GET">
-                                @csrf
-                                <button type="submit"
-                                    class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">
-                                    Read more
-                                </button>
-                            </form>
-                        </div>
+                        
+                        <p class="block font-sans text-base font-light leading-relaxed text-gray-700 antialiased">${event.start_datetime}</p>
+                        <P class="flex items-center gap-1.5 font-sans text-base font-normal leading-relaxed text-blue-gray-900 antialiased">${event.price}DH</p>
+
+                        <button class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">Read more</button>
+                    </div>
+                    <div class="p-6 pt-3">
+                        <button class="block w-full select-none rounded-lg bg-pink-500 py-3.5 px-7 text-center align-middle font-sans text-sm font-bold uppercase text-white shadow-md shadow-pink-500/20 transition-all hover:shadow-lg hover:shadow-pink-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none" type="button" data-ripple-light="true">Reserve</button>
                     </div>
                 </div>
-            </div>
-        </div>
-    </div>
-</div>
                 `);
 
+                    });
+                }
+               else {
+                $("#placeSearchResult").html(`<p>No events found</p>`);
+                } 
 
-                });
             }
 
-        }
+        });
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
+    </script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
     </script>
 @endsection
