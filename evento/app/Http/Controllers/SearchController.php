@@ -19,16 +19,16 @@ class SearchController extends Controller
     {
         $event = Event::query();
         $categories = Category::get();
-        
-        if ($request->keyword) {
-            $event->where('title', 'LIKE', '%' . $request->keyword . '%');
-        }
-
         if ($request->category) {
-            $event->where('title', 'LIKE', '%' . $request->keyword . '%')
+            $event->where('title', 'LIKE', '%' . $request->search_input . '%')
                     ->where('category_id', $request->category);
         }
 
+        else{
+            $event->where('title', 'LIKE', '%' . $request->search_input . '%');
+        }
+
+        
         $filteredEvents = $event->get();
 
         return response()->json(['events' => $filteredEvents]);

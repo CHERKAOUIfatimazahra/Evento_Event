@@ -3,7 +3,7 @@
 
         <div class="sm:col-span-2">
             <a href="/" class="inline-flex items-center">
-                <img src="images/logo.png" alt="YALLA" class="h-60 w-60">
+                <img src="images/.png" alt="Evento" class="h-60 w-60">
             </a>
             <div class="mt-6 lg:max-w-xl">
                 <p class="text-sm text-gray-800">

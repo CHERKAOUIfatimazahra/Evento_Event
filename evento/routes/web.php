@@ -8,6 +8,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\StaticController;
+use App\Http\Controllers\TicketController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -22,9 +23,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-
-
-Route::middleware('guest')->group(function () {
     // Home page
     Route::get('/', [HomeController::class, 'index']);
     Route::get('/single_page/{event}', [HomeController::class, 'eventShow'])->name('events.eventShow');
@@ -33,7 +31,7 @@ Route::middleware('guest')->group(function () {
     Route::get('/find-event', [HomeController::class,'findEvent']);
     Route::get('/filter',[SearchController::class,'index']);
     Route::get('/search', [SearchController::class, 'search']); 
-    Route::get('/search/{ids}', [SearchController::class, 'filterByCategory']);
+    // Route::get('/search/{ids}', [SearchController::class, 'filterByCategory']);
 
     // Contact page
     Route::view('/contact', 'contact');
@@ -50,7 +48,7 @@ Route::middleware('guest')->group(function () {
     Route::post('/forgot-password', [AuthController::class, 'sendResetLinkEmail'])->name('password.email');
     Route::get('/reset-password/{token}', [AuthController::class, 'showResetPasswordForm'])->name('password.reset');
     Route::post('/reset-password', [AuthController::class, 'resetPassword'])->name('password.update');
-});
+
 
 Route::group(['middleware' => ['auth', 'role:admin']], function() {
     Route::resource('users',UserController::class);
@@ -60,7 +58,7 @@ Route::group(['middleware' => ['auth', 'role:admin']], function() {
 });
 
 Route::group(['middleware' => ['auth', 'role:organizer']], function() {
-    Route::resource('events',EventController::class);
+
     Route::get('/static-reservation',[StaticController::class, 'reservationStatique']);
     Route::get('/events/{eventId}/reservations', [ReservationController::class, 'index'])->name('events.reservations.index');
     Route::put('/reservation/{id}/update-status', [ReservationController::class, 'updateStatus'])->name('reservations.updateStatus');
@@ -68,6 +66,9 @@ Route::group(['middleware' => ['auth', 'role:organizer']], function() {
 
 Route::middleware('auth')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+    Route::resource('events',EventController::class);
     Route::view('/profile','dashbord.profile');
     Route::post('/events/{eventId}/reserve', [ReservationController::class, 'reservation'])->name('events.reserve');
+    Route::get('/user/{userId}/reservations', [TicketController::class, 'showReservations'])->name('user.reservations');
+    Route::get('/event/{event}', [TicketController::class, 'userReservations'])->name('event.reservations');
 });

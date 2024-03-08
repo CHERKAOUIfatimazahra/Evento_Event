@@ -2,7 +2,7 @@
 @if (auth()->user()->hasRole('admin'))
     <nav class="bg-white shadow-lg h-screen fixed top-0 left-0 min-w-[250px] py-6 px-4 font-[sans-serif] overflow-auto">
         <a href="/">
-            <img src="{{ asset('images/logo.png') }}" height="100" width="100" class="">
+            <img src="{{ asset('images/evento.png') }}" height="100" width="100" class="">
         </a>
         <ul class="mt-6">
             <li>
@@ -150,7 +150,7 @@
 @if (auth()->user()->hasRole('organizer'))
     <nav class="bg-white shadow-lg h-screen fixed top-0 left-0 min-w-[250px] py-6 px-4 font-[sans-serif] overflow-auto">
         <a href="/">
-            <img src="{{ asset('images/logo.png') }}" height="100" width="100" class="">
+            <img src="{{ asset('images/evento.png') }}" height="100" width="100" class="">
         </a>
         <ul class="mt-6">
             <li>
@@ -224,13 +224,13 @@
     <nav
         class="bg-white shadow-lg h-screen fixed top-0 left-0 min-w-[250px] py-6 px-4 font-[sans-serif] overflow-auto">
         <a href="/">
-            <img src="{{ asset('images/logo.png') }}" height="100" width="100" class="">
+            <img src="{{ asset('images/evento.png') }}" height="100" width="100" class="">
         </a>
         <div class="mt-6">
             <h6 class="text-blue-600 text-sm font-bold px-4">Information</h6>
             <ul class="mt-3">
                 <li>
-                    <a href="{{ route('events.index') }}"
+                    <a href="{{ route('user.reservations', ['userId' => auth()->user()->id]) }}"
                         class="text-black hover:text-blue-600 text-sm flex items-center hover:bg-blue-50 rounded px-4 py-3 transition-all">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="w-[18px] h-[18px] mr-4"
                             viewBox="0 0 24 24">
@@ -240,7 +240,7 @@
                             <path d="M12 18a1 1 0 0 1-1-1V7a1 1 0 0 1 2 0v10a1 1 0 0 1-1 1z" data-original="#000000" />
                             <path d="M6 12a1 1 0 0 1 1-1h10a1 1 0 0 1 0 2H7a1 1 0 0 1-1-1z" data-original="#000000" />
                         </svg>
-                        <span>Events</span>
+                        <span>My Reservation</span>
                     </a>
                 </li>
             </ul>

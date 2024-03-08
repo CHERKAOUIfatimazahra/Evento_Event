@@ -2,7 +2,7 @@
     <div class="flex items-center flex-1 md:absolute md:inset-y-0 md:left-0">
         <div class="flex items-center justify-between w-full md:w-auto">
             <a href="" aria-label="Home">
-                <img src="images/logo.png" height="150" width="150" />
+                <img src="images/evento.png" height="150" width="150" />
             </a>
             <div class="-mr-2 flex items-center md:hidden">
                 <button type="button" id="main-menu" aria-label="Main menu" aria-haspopup="true"

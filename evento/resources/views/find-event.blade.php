@@ -53,8 +53,8 @@
                 <select id="category" name="name"
                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     required>
-                    <option disabled selected>Choose a category</option>
-                    <option disabled selected>All</option>
+                     
+                    <option value="0" selected>All</option>
                     @foreach ($categories as $category)
                         <option value="{{ $category->id }}">{{ $category->name }}</option>
                     @endforeach
@@ -63,7 +63,18 @@
 
         </div>
         <div id="placeSearchResult">
-            <!-- Search results will be displayed here -->
+            <div>
+                <h1 class="text-center text-3xl font-bold">Find your events</h1>
+                <div class="relative flex justify-center overflow-hidden py-6 sm:py-12">
+                    <div class="flex flex-wrap justify-center">
+                        @foreach ($publishedEvents as $event)
+                            <div class="m-3">
+                                <x-events-cards :event="$event"></x-events-cards>
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -81,9 +92,9 @@
 
             $('#searchForm').submit(function(e) {
                 e.preventDefault();
-                var keyword = $('#default-search').val();
+                var search_input = $('#default-search').val();
                 var token = $("meta[name='csrf-token']").attr("content");
-
+                var category = $("#category").val();
                 $.ajax({
                     type: 'GET',
                     url: '/search',
@@ -91,10 +102,11 @@
                         'XSRF-TOKEN': token
                     },
                     data: {
-                        keyword: keyword
+                        search_input: search_input
+                        ,
+                        category: category
                     },
                     success: function(response) {
-                        console.log(response.events);
                         table_post_row(response.events);
                     }
                 });
@@ -106,6 +118,7 @@
             if (events.length <= 0) {
                 htmlView += `<p>No events found</p>`;
             } else {
+                $("#placeSearchResult").html("");
                 events.forEach(event => {
                     $("#placeSearchResult").append(`
             <div>

@@ -15,10 +15,15 @@ class EventController extends Controller
      */
     public function index()
     {
-        $userId = auth()->user()->id;
-        $events = Event::where('user_id', $userId)->latest()->paginate(10);
+        $user = auth()->user();
+    
+        if ($user->hasRole('admin')) {
+            $events = Event::latest()->paginate(10);
+        } else {
+            $events = Event::where('user_id', $user->id)->latest()->paginate(10);
+        }
         
-        return view('dashbord.events.index',compact('events'))
+        return view('dashbord.events.index', compact('events'))
                     ->with('i', (request()->input('page', 1) - 1) * 10);
     }
  

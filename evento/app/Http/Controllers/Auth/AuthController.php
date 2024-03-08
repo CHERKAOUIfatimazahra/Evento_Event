@@ -32,16 +32,17 @@ class AuthController extends Controller
         $credentials = $request->validated();
         
         if ($this->authRepository->login($credentials)) {
+
             $request->session()->regenerate();
+
             if ('role' === 'organizer'){
                 return redirect('/statistique');
-            }
-            if ('role' === 'spectator'){
+            }else{
                 return redirect('/');
-            }
-            
+            } 
+
         }
-        
+
         return back()->withInput($request->only('email'));
     }
 
